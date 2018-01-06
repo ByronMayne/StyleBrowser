@@ -1,3 +1,6 @@
 [submodule "Editor/GUIGrid"]
 	path = Editor/GUIGrid
 	url = https://github.com/ByronMayne/GUIGrid.git
+[submodule "Editor/CaptureGroups"]
+	path = Editor/CaptureGroups
+	url = https://github.com/ByronMayne/CaptureGroups
