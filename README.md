@@ -14,8 +14,8 @@ Style Browser is an easy to use Editor Window that allows you to view all of the
 
 
 ### Submoudles
-* [GUIGird](): Used to draw the grid that displays the elements.
-* [Capture Groups](): Used to draw screen shots for the wiki.
+* [GUIGird](https://github.com/ByronMayne/GUIGrid): Used to draw the grid that displays the elements.
+* [Capture Groups](https://github.com/ByronMayne/CaptureGroups): Used to draw screen shots for the wiki.
 
 ### Credit 
 
