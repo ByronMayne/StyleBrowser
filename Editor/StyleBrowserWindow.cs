@@ -1,11 +1,12 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 
 namespace StyleBrowser
 {
     namespace UnityStyles
     {
-        public sealed class StyleBrowserWindow : EditorWindow
+        public sealed class StyleBrowserWindow : EditorWindow, IHasCustomMenu
         {
             public enum PreviewType
             {
@@ -27,6 +28,11 @@ namespace StyleBrowser
             private GUIContent _stylesButtonLabel;
             private GUIContent _TexturesButtonLabel;
 
+            private string GetSavePath(string name)
+            {
+                return "Assets/Library/StyleBrowser/Editor/Docs/" + name;
+            }
+
             private void OnEnable()
             {
                 _stylesButtonLabel = new GUIContent("Styles");
@@ -47,9 +53,22 @@ namespace StyleBrowser
 
             private void OnGUI()
             {
-                DrawToolbar();
-                Rect gridRect = GUILayoutUtility.GetRect(EditorGUIUtility.currentViewWidth, 50f, GUILayout.ExpandHeight(true));
-                _styleGrid.DoLayout(gridRect);
+                CaptureGroup.Begin(GetSavePath("FullWindow"));
+                {
+                    CaptureGroup.Begin(GetSavePath("Toolbar"));
+                    {
+                        DrawToolbar();
+                    }
+                    CaptureGroup.End();
+
+                    CaptureGroup.Begin(GetSavePath("Grid"));
+                    {
+                        Rect gridRect = GUILayoutUtility.GetRect(EditorGUIUtility.currentViewWidth, 50f, GUILayout.ExpandHeight(true));
+                        _styleGrid.DoLayout(gridRect);
+                    }
+                    CaptureGroup.End();
+                }
+                CaptureGroup.End();
             }
 
             private void DrawToolbar()
@@ -94,6 +113,18 @@ namespace StyleBrowser
                     }
                 }
                 EditorGUILayout.EndHorizontal();
+            }
+
+            public void AddItemsToMenu(GenericMenu menu)
+            {
+                menu.AddItem(new GUIContent("Preform Capture"), false, PreformCaputre);
+                menu.AddItem(new GUIContent("Show Capture Debug"), CaptureGroup.ShowDebug, () => { CaptureGroup.ShowDebug = !CaptureGroup.ShowDebug; });
+            }
+
+            private void PreformCaputre()
+            {
+                position = new Rect(50, 50, 700, 400);
+                CaptureGroup.PreformCapture(this);
             }
         }
     }
