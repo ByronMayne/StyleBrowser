@@ -3,13 +3,13 @@
 Style Browser is an easy to use Editor Window that allows you to view all of the built in styles and textures that Unity has built into it. Simply right click and the item will be copied to your clipboard.
 
 
-![](./Docs/FullWindow.png)
+![](./Editor/Docs/FullWindow.png)
 
 
 ## Features
 
 * Pick to view all styles or textures
-![](./Docs/Toolbar.png)
+![](./Editor/Docs/Toolbar.png)
 * Right click copies the style or texture
 
 
